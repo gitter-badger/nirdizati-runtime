@@ -31,14 +31,14 @@ learning_rate = {}
 
 # BPI12 parameters
 dataset = "bpi12"
-case_id_col[dataset] = "sequence_nr"
+case_id_col[dataset] = "case_id"
 event_nr_col[dataset] = "event_nr"
 
 static_cols[dataset] = ["AMOUNT_REQ"]
 dynamic_cols[dataset] = ["proctime", "elapsed", "activity_name", "Resource", "remtime"]
 cat_cols[dataset] = ["activity_name", "Resource"]
 
-cls_method[dataset] = "gbm"
+cls_method[dataset] = "rf"
 n_estimators[dataset] = 240
 max_features[dataset] = 0.05
 learning_rate[dataset] = 0.01
@@ -74,3 +74,17 @@ cls_method[dataset] = "gbm"
 n_estimators[dataset] = 95
 max_features[dataset] = 0.4
 learning_rate[dataset] = 0.2
+
+# sample trace parameters
+dataset = "sample_trace"
+case_id_col[dataset] = "case_id"
+event_nr_col[dataset] = "event_nr"
+
+static_cols[dataset] = []
+dynamic_cols[dataset] = ["activity_name", "remtime"]
+cat_cols[dataset] = ["activity_name"]
+
+cls_method[dataset] = "gbm"
+n_estimators[dataset] = 240
+max_features[dataset] = 0.05
+learning_rate[dataset] = 0.01

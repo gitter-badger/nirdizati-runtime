@@ -23,7 +23,7 @@ import sys
 import batch.dataset_params as dataset_params
 import cPickle
 
-dataset = sys.argv[1]
+dataset = "bpi12"
 
 train = pd.read_csv("../data/train_%s.csv" % dataset, sep=",", encoding="utf-8")
 
@@ -56,5 +56,5 @@ predictive_monitor.train(train)
 
 models = predictive_monitor.models
 
-with open('predictive_monitor_%s.cpickle' % dataset, 'wb') as f:
+with open('predictive_monitor_%s.pkl' % dataset, 'wb') as f:
     cPickle.dump(models, f, protocol=2)

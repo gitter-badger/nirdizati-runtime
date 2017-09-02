@@ -1,6 +1,6 @@
 [
  {
-   "sequence_nr": 201605,
+   "case_id": 201605,
    "Resource": 11189,
    "AMOUNT_REQ": 25000,
    "proctime": 173,
@@ -13,7 +13,7 @@
    "remtime": 0
  },
  {
-   "sequence_nr": 201605,
+   "case_id": 201605,
    "Resource": 11000,
    "AMOUNT_REQ": 25000,
    "proctime": 852,
@@ -26,7 +26,7 @@
    "remtime": 0
  },
  {
-   "sequence_nr": 201605,
+   "case_id": 201605,
    "Resource": 10809,
    "AMOUNT_REQ": 25000,
    "proctime": 1215,
@@ -39,7 +39,7 @@
    "remtime": 0
  },
  {
-   "sequence_nr": 201605,
+   "case_id": 201605,
    "Resource": 10931,
    "AMOUNT_REQ": 25000,
    "proctime": 6901,
@@ -52,7 +52,7 @@
    "remtime": 0
  },
  {
-   "sequence_nr": 201605,
+   "case_id": 201605,
    "Resource": 10809,
    "AMOUNT_REQ": 25000,
    "proctime": 526,
@@ -61,19 +61,6 @@
    "activity_name": "W_Assessing_application",
    "label": "true",
    "event_nr": 5,
-   "last": "false",
-   "remtime": 0
- },
- {
-   "sequence_nr": 201605,
-   "Resource": 11181,
-   "AMOUNT_REQ": 25000,
-   "proctime": 2220,
-   "time": "2012-02-10 13:58:05",
-   "elapsed": 2090610,
-   "activity_name": "W_Calling _missing_information",
-   "label": "true",
-   "event_nr": 6,
    "last": "false",
    "remtime": 0
  }

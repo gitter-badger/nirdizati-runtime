@@ -23,11 +23,11 @@ import sys
 import batch.dataset_params as dataset_params
 import cPickle
 
-if len(sys.argv) != 3:
-    sys.exit("Usage: python test.py json-prefix dataset-name")
+# if len(sys.argv) != 3:
+#     sys.exit("Usage: python test.py json-prefix dataset-name")
 
-testPrefix = sys.argv[1]
-dataset = sys.argv[2]
+testPrefix = "dt_test_bpi12.json"
+dataset = "bpi12"
 
 test = pd.read_json('%s' % testPrefix, orient='records')
 
@@ -56,7 +56,15 @@ else:
 predictive_monitor = PredictiveMonitor(event_nr_col=event_nr_col, case_id_col=case_id_col,
                                        cls_method=cls_method, encoder_kwargs=encoder_kwargs, cls_kwargs=cls_kwargs)
 
-with open('predictive_monitor_%s.cpickle' % dataset, 'rb') as f:
+predictive_monitor2 = PredictiveMonitor(event_nr_col=event_nr_col, case_id_col=case_id_col,
+                                       cls_method=cls_method, encoder_kwargs=encoder_kwargs, cls_kwargs=cls_kwargs)
+
+
+with open('predictive_monitor_%s.pkl' % dataset, 'rb') as f:
     predictive_monitor.models = cPickle.load(f)
+
+# with open('randomforestregressionfreq_encode_bpi2012_data.csv.pkl', 'rb') as f2:
+#     predictive_monitor2.models = cPickle.load(f2)
+
 
 print predictive_monitor.test(test)

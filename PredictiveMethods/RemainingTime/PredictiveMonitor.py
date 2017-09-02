@@ -17,7 +17,7 @@ License along with this program.
 If not, see <http://www.gnu.org/licenses/lgpl.html>.
 """
 
-from batch.PredictiveModel import PredictiveModel
+from PredictiveModel import PredictiveModel
 import numpy as np
 
 
@@ -38,26 +38,19 @@ class PredictiveMonitor():
 
         max_events = np.max(dt_train[self.event_nr_col]) if max_events is None else max_events
         self.max_events = max_events
-        for nr_events in xrange(1, max_events):
-            pred_model = PredictiveModel(nr_events=nr_events, case_id_col=self.case_id_col,
+
+        pred_model = PredictiveModel(case_id_col=self.case_id_col,
                                          cls_method=self.cls_method,
                                          encoder_kwargs=self.encoder_kwargs, cls_kwargs=self.cls_kwargs)
-
-            pred_model.fit(dt_train)
-            self.models[nr_events] = pred_model
+        pred_model.fit(dt_train)
+        self.models = pred_model
 
     def test(self, dt_test):
 
-        nr_events = len(dt_test)
-
-        if nr_events not in self.models:
-            print("For this prefix length, a model has not been trained!")
-            return None
-
         # select relevant model
-        pred_model = self.models[nr_events]
+        pred_model = self.models
 
         # predict
         predictions_proba = pred_model.predict_proba(dt_test)
-        predictions_proba = np.rint(predictions_proba)
+        #predictions_proba = np.rint(predictions_proba)
         return predictions_proba.item()
