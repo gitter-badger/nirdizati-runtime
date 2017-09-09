@@ -26,11 +26,9 @@ import frequency_encoder
 class PredictiveModel():
     hardcoded_prediction = None
 
-    def __init__(self, case_id_col, encoder_kwargs, cls_kwargs, cls_method="rf"):
+    def __init__(self, case_id_col, cls_kwargs, cls_method="rf"):
 
         self.case_id_col = case_id_col
-
-        #self.encoder = SequenceEncoder(case_id_col=case_id_col, **encoder_kwargs)
         self.encoder = frequency_encoder.FrequencyEncoder()
 
         if cls_method == "gbm":
@@ -41,19 +39,13 @@ class PredictiveModel():
             print("Classifier method not known")
 
     def fit(self, dt_train):
-        #train_encoded = self.encoder.fit_transform(dt_train)
-        # specify a column that contains remaining time after nr_events have passed
         train_encoded = self.encoder.encode_trace(dt_train)
 
-        #target_time = "remtime_%s" % self.nr_events
-
-        #remtime_cols = [c for c in train_encoded.columns if c.lower()[:7] == 'remtime']
         remtime_cols = "remaining_time"
 
         train_x = train_encoded.drop([self.case_id_col], axis=1)
         train_X = train_x.drop(remtime_cols, axis=1)
 
-        # print(train_encoded.columns)
         train_y = train_encoded[remtime_cols]
 
         self.train_X = train_X
@@ -67,8 +59,6 @@ class PredictiveModel():
     def predict_proba(self, dt_test):
         test_encoded = self.encoder.encode_trace(dt_test)
 
-        # select a column that contains remaining time after nr_events have passed
-        #target_time = "remtime_%s" % self.nr_events
         remtime_cols = "remaining_time"
 
         test_x = test_encoded.drop([self.case_id_col], axis=1)
